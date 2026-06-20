@@ -7,7 +7,6 @@ class CourierMapper {
     fun toEntity(courierRequestDto: CourierRequestDto): Courier {
         return Courier(
             name = courierRequestDto.name,
-            ordersToDeliver = mutableListOf()
         )
     }
 

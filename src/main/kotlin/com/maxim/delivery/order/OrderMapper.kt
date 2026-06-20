@@ -19,9 +19,8 @@ class OrderMapper(
     fun toEntity(orderRequestEntity: OrderRequestDto): Order {
         return Order(
             orderedBy = findClientById(orderRequestEntity.clientId),
-            deliveredBy = null,
-            productList = findProductsByIds(orderRequestEntity.productIds),
-            status = OrderStatus.CREATED
+            courier = null,
+            productList = findProductsByIds(orderRequestEntity.productIds)
         )
     }
 
@@ -29,9 +28,10 @@ class OrderMapper(
         return OrderResponseDto(
             id = order.id!!,
             // если курьер не null, то верни его id
-            deliveredBy = order.deliveredBy?.let { courierMapper.toResponse(it) },
+            deliveredBy = order.courier?.let { courierMapper.toResponse(it) },
             createdAt = order.createdAt!!,
-            productList = order.productList.map { productMapper.toResponse(it) }
+            productList = order.productList.map { productMapper.toResponse(it) },
+            status = order.status
         )
     }
 

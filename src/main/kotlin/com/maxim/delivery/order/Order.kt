@@ -15,11 +15,11 @@ class Order(
 
     @ManyToOne // много заказов могут быть у одного курьера
     @JoinColumn(name = "courier_id")
-    var deliveredBy: Courier?,
+    var courier: Courier?,
 
     @Column(nullable = false, updatable = true)
     @Enumerated(EnumType.STRING)
-    var status: OrderStatus,
+    var status: OrderStatus = OrderStatus.CREATED,
 
     @ManyToMany // много заказов может содержать много продуктов
     @JoinTable(

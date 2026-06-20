@@ -13,6 +13,6 @@ class Courier(
     @Column(nullable = false)
     val name: String,
 
-    @OneToMany(mappedBy = "deliveredBy")
-    val ordersToDeliver: MutableList<Order>
+    @OneToMany(mappedBy = "courier")
+    val ordersToDeliver: MutableList<Order> = mutableListOf()
 ) : BaseEntity()
